@@ -15,5 +15,8 @@ class LocalRepositoryB (
     override fun getBarang(id_B: String): Flow<Barang> {
         return barangDao.getBarang(id_B)
     }
+    override suspend fun updateBarang(barang: Barang) {
+        barangDao.updateBarang(barang)
+    }
 
 }
