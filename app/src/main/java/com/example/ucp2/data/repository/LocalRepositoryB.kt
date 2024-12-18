@@ -9,5 +9,8 @@ class LocalRepositoryB (
     override suspend fun insertBarang(barang: Barang) {
         barangDao.insertBarang(barang)
     }
+    override fun getAllBarang(): Flow<List<Barang>> {
+        return barangDao.getAllBarang()
+    }
 
 }
