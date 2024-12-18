@@ -14,6 +14,8 @@ interface BarangDao {
     suspend fun insertBarang(
         barang: Barang
     )
+    @Query("SELECT*FROM barang ORDER BY name ASC")
+    fun getAllBarang(): Flow<List<Barang>>
 
 
 }
