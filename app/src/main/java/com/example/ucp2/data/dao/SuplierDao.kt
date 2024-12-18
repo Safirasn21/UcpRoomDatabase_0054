@@ -12,5 +12,6 @@ interface SuplierDao {
     suspend fun insertSuplier(
         suplier: Suplier
     )
-
+    @Query("SELECT*FROM suplier ORDER BY supname ASC")
+    fun  getAllSuplier(): Flow<List<Suplier>>
 }
