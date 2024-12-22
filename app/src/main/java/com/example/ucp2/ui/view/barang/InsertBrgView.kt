@@ -32,7 +32,9 @@ import com.example.ucp2.ui.viewmodel.barang.FormErrorState
 import com.example.ucp2.ui.viewmodel.barang.PenyediaBrgViewModel
 import kotlinx.coroutines.launch
 
-
+object DestinasiInsert : AlamatNavigasi {
+    override val route: String = "Insert_brg"
+}
 
 @Composable
 fun InsertBrgView(
