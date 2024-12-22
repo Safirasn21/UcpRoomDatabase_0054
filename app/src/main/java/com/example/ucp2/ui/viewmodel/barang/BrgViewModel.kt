@@ -2,6 +2,12 @@ package com.example.ucp2.ui.viewmodel.barang
 
 import com.example.ucp2.data.entity.Barang
 
+data class BarangUIState(
+    val BarangEvent: BarangEvent = BarangEvent(),
+    val isEntryValid: FormErrorState = FormErrorState(),
+    val snackBarMesssage: String? = null
+)
+
 data class FormErrorState(
     val id_B: String? = null,
     val name: String? = null,
