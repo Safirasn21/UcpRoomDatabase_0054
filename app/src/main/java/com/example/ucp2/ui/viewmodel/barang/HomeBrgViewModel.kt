@@ -13,7 +13,39 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 
+class HomeBrgViewModel (
+    private val repositoryB: RepositoryB
+) : ViewModel() {
 
+    val homeUiState: StateFlow<HomeUiState> = repositoryB.getAllBarang()
+        .filterNotNull()
+        .map {
+            HomeUiState (
+                listBrg = it.toList(),
+                isLoading = false,
+            )
+        }
+        .onStart {
+            emit(HomeUiState(isLoading = true))
+            delay(900)
+        }
+        .catch {
+            emit(
+                HomeUiState(
+                    isLoading = false,
+                    isError = true,
+                    errorMessage = it.message ?: "Terjadi Kesalahan"
+                )
+            )
+        }
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000),
+            initialValue = HomeUiState(
+                isLoading = true,
+            )
+        )
+}
 
 data class HomeUiState (
     val listBrg: List<Barang> = listOf(),
