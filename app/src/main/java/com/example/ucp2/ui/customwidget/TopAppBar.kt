@@ -21,5 +21,33 @@ fun TopAppBar(
     judul: String,
     modifier: Modifier
 ) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        contentAlignment = Alignment.Center // Pastikan konten di tengah
+    ) {
+        if (showBackButton) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                TextButton(
+                    onClick = onBack,
+                    modifier = Modifier.align(Alignment.CenterVertically)
+                ) {
+                    Text("Kembali")
+                }
+                Spacer(modifier = Modifier.weight(2f))
+            }
+        }
 
+        // Teks judul
+        Text(
+            text = judul,
+            fontSize = 25.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.align(Alignment.Center)
+        )
+    }
 }
