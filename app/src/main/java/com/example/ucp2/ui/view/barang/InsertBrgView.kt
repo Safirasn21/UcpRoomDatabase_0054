@@ -33,6 +33,33 @@ import com.example.ucp2.ui.viewmodel.barang.PenyediaBrgViewModel
 import kotlinx.coroutines.launch
 
 
+
+@Composable
+fun InsertBodyBrg(
+    modifier: Modifier = Modifier,
+    onValueChange: (BarangEvent) -> Unit,
+    uiState: BarangUIState,
+    onClick: () -> Unit
+){
+    Column (
+        modifier = Modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ){
+        FormBarang(
+            BarangEvent = uiState.BarangEvent,
+            onValueChange = onValueChange,
+            errorState = uiState.isEntryValid,
+            modifier = Modifier.fillMaxWidth()
+        )
+        Button(
+            onClick = onClick,
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            Text("Simpan")
+        }
+    }
+}
 @Preview(showBackground = true)
 @Composable
 fun FormBarang(
