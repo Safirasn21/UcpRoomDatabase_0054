@@ -50,7 +50,7 @@ fun DetailBrgView(
 ) {
     Scaffold (
         topBar = {
-            TopAppBar(
+            com.example.ucp2.ui.customwidget.TopAppBar(
                 judul = "Daftar barang",
                 showBackButton = false,
                 onBack = { },
