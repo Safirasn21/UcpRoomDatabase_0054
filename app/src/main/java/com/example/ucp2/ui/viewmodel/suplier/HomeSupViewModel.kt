@@ -3,7 +3,7 @@ package com.example.ucp2.ui.viewmodel.suplier
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ucp2.data.entity.Suplier
-import com.example.ucp2.data.repository.RepositoryS
+import com.example.ucp2.repository.RepositoryS
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
