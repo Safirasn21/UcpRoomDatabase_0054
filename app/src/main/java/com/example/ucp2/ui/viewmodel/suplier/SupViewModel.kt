@@ -11,6 +11,24 @@ import kotlinx.coroutines.launch
 
 
 
+data class FormErrorStates(
+    val idS: String? = null,
+    val supname: String? = null,
+    val contact: String? = null,
+    val address: String? = null
+){
+    fun isValid(): Boolean{
+        return idS == null && contact == null && address == null && supname == null
+    }
+}
+
+fun SuplierEvent.toSuplierEntity(): Suplier= Suplier(
+    id_S = id_S,
+    supname = supname,
+    contact = contact,
+    address = address
+)
+
 data class SuplierEvent(
     val id_S: String = "",
     val supname: String = "",
