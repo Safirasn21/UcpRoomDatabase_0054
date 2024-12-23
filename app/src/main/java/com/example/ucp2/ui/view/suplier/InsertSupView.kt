@@ -36,6 +36,59 @@ import kotlinx.coroutines.launch
 
 
 @Composable
+fun InsertSupView(
+    onBack: () -> Unit,
+    onNavigate: () -> Unit,
+    modifier: Modifier = Modifier,
+    viewModel: SupViewModel = viewModel(factory = PenyediaSupViewModel.Factory)//Inisialisasi ViewModel
+){
+    val uiState = viewModel.uiState //Ambil UI state dari ViewModel
+    val snackbarHostState = remember { SnackbarHostState() }
+    val coroutlineScope = rememberCoroutineScope()
+
+    //Observasi perubahan snackbarMessage
+    LaunchedEffect(uiState.snackBarMesssage) {
+        uiState.snackBarMesssage?.let {message ->
+            coroutlineScope.launch {
+                snackbarHostState.showSnackbar(message)
+                viewModel.resetsnackBarMessage()
+            }
+        }
+
+    }
+    Scaffold(
+        modifier = modifier,
+        snackbarHost = { SnackbarHost(hostState = snackbarHostState) }
+    ) {
+            padding ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(padding)
+                .padding(16.dp)
+        ) {
+            TopAppBar(
+                onBack = onBack,
+                showBackButton = true,
+                judul = "Tambah Suplier",
+                modifier = modifier
+            )
+            //Isi Body
+            InsertBodySup(
+                uiState = uiState,
+                onValueChange = {updatedEvent ->
+                    viewModel.updateState(updatedEvent)
+                },
+                onClick = {
+                    viewModel.saveData()
+                    onNavigate()
+                }
+            )
+        }
+    }
+}
+
+@Composable
 fun InsertBodySup(
     modifier: Modifier = Modifier,
     onValueChange: (SuplierEvent) -> Unit,
