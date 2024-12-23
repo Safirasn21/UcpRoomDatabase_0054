@@ -33,7 +33,9 @@ import com.example.ucp2.ui.viewmodel.suplier.SuplierEvent
 import com.example.ucp2.ui.viewmodel.suplier.SuplierUIState
 import kotlinx.coroutines.launch
 
-
+object Destinasinsert : AlamatNavigasi {
+    override val route: String = "Insert_sup"
+}
 
 @Composable
 fun InsertSupView(
