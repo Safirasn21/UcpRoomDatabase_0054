@@ -184,6 +184,11 @@ fun CardBrg(
     modifier: Modifier = Modifier,
     onClick: () -> Unit = { }
 ) {
+    val cardColor = when {
+        brg.stock.toInt() == 0 -> MaterialTheme.colorScheme.error //jadi merah
+        brg.stock.toInt() in 1..10 -> MaterialTheme.colorScheme.secondary //kuning
+        else -> MaterialTheme.colorScheme.primary
+    }
     Card(
         onClick = onClick,
         modifier = modifier
@@ -206,7 +211,6 @@ fun CardBrg(
                     fontSize = 20.sp
                 )
             }
-
             Row (
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
