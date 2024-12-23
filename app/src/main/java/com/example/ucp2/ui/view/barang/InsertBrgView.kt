@@ -22,7 +22,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.ucp2.data.SuplierList
+import com.example.ucp2.ui.customwidget.SupDropDown
 import com.example.ucp2.ui.customwidget.TopAppBar
 import com.example.ucp2.ui.navigasi.AlamatNavigasi
 import com.example.ucp2.ui.viewmodel.barang.BarangEvent
@@ -202,19 +205,21 @@ fun FormBarang(
             color = Color.Red
         )
         Spacer(modifier = Modifier.height(16.dp))
-        OutlinedTextField(
-            modifier = Modifier.fillMaxWidth(),
-            value = BarangEvent.supname,
-            onValueChange = {
-                onValueChange(BarangEvent.copy(supname = it))
-            },
-            label = { Text("Suplier name") },
-            isError = errorState.supname != null,
-            placeholder = { Text("Masukkan Nama Suplier") }
+        SupDropDown(
+            selectedValue = BarangEvent.supname,
+            judul = SuplierList.Supname(),
+            label = "Nama Suplier",
+            onValueChange = { selectedValue ->
+                onValueChange(BarangEvent.copy(supname = selectedValue))
+            }
         )
-        Text(
-            text = errorState.supname ?: "",
-            color = Color.Red
-        )
+        if (errorState.supname != null){
+            Text(
+                text = errorState.supname!!,
+                color = Color.Red,
+                fontSize = 12.sp,
+                modifier = Modifier.padding(start = 16.dp)
+            )
+        }
     }
 }
