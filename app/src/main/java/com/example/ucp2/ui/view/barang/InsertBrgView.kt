@@ -43,7 +43,7 @@ fun InsertBrgView(
     modifier: Modifier = Modifier,
     viewModel: BrgViewModel = viewModel(factory = PenyediaBrgViewModel.Factory)//Inisialisasi ViewModel
 ){
-    val uiState = viewModel.uiState //Ambil UI state dari ViewModel
+    val uiState = viewModel.uiState
     val snackbarHostState = remember { SnackbarHostState() }
     val coroutlineScope = rememberCoroutineScope()
 
@@ -121,6 +121,7 @@ fun FormBarang(
     BarangEvent: BarangEvent = BarangEvent(),
     onValueChange: (BarangEvent) -> Unit = {},
     errorState: FormErrorState = FormErrorState(),
+
     modifier: Modifier = Modifier
 ){
     Column(
@@ -216,5 +217,4 @@ fun FormBarang(
             color = Color.Red
         )
     }
-
 }

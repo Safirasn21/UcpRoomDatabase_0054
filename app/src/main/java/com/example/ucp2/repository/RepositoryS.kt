@@ -1,4 +1,4 @@
-package com.example.ucp2.data.repository
+package com.example.ucp2.repository
 
 import com.example.ucp2.data.entity.Suplier
 import kotlinx.coroutines.flow.Flow
