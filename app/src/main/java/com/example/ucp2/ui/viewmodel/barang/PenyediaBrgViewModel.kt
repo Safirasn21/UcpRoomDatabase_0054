@@ -6,7 +6,7 @@ import androidx.lifecycle.viewmodel.CreationExtras
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.ucp2.TokoApp
-import com.example.ucp2.data.repository.LocalRepositoryB
+import com.example.ucp2.repository.LocalRepositoryB
 
 object PenyediaBrgViewModel{
     val Factory = viewModelFactory {
