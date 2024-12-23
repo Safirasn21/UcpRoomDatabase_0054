@@ -8,6 +8,20 @@ import com.example.ucp2.TokoApp
 import com.example.ucp2.data.repository.LocalRepositoryS
 
 
+object PenyediaSupViewModel{
+    val Factory = viewModelFactory {
+        initializer {
+            SupViewModel(
+                TokoApp().containerApp.repositoryS as LocalRepositoryS
 
+            )
+        }
+        initializer {
+            HomeSupViewModel(
+                TokoApp().containerApp.repositoryS
+            )
+        }
+    }
+}
 fun CreationExtras.TokoApp(): TokoApp =
     (this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as TokoApp)
