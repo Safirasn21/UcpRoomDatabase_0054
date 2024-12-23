@@ -44,6 +44,104 @@ import com.example.ucp2.ui.viewmodel.suplier.PenyediaSupViewModel
 import kotlinx.coroutines.launch
 
 
+@Composable
+fun HomeSupView(
+    viewModel: HomeSupViewModel = viewModel(factory = PenyediaSupViewModel.Factory),
+    onAddSup: () -> Unit = { },
+    onDetailClick: (String) -> Unit = { },
+    modifier: Modifier = Modifier
+) {
+    Scaffold (
+        topBar = {
+            TopAppBar(
+                onBack = { },
+                showBackButton = false,
+                judul = "Daftar Suplier",
+                modifier = modifier
+            )
+        },
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = onAddSup,
+                shape = MaterialTheme.shapes.medium,
+                modifier = Modifier.padding(16.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Add,
+                    contentDescription = "Tambah Suplier",
+                )
+            }
+        }
+    ) { innerPadding ->
+        val homeUiStates by viewModel.homeUiStates.collectAsState()
+
+        BodyHomeSupView (
+            homeUiStates = homeUiStates,
+            onClick = {
+                onDetailClick(it)
+            },
+            modifier = Modifier.padding(innerPadding)
+        )
+    }
+}
+
+@Composable
+fun BodyHomeSupView(
+    homeUiStates: HomeUiStates,
+    onClick: (String) -> Unit = { },
+    modifier: Modifier = Modifier
+) {
+    val coroutineScope = rememberCoroutineScope()
+    val snackbarHostState = remember { SnackbarHostState() } // Snackbar State
+    when {
+        homeUiStates.isLoading -> {
+            // Menampilkan indikator loading
+            Box(
+                modifier = modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                CircularProgressIndicator()
+            }
+        }
+
+        homeUiStates.isError -> {
+            // Menampilkan pesan error
+            LaunchedEffect (homeUiStates.errorMessage) {
+                homeUiStates.errorMessage?.let { message ->
+                    coroutineScope.launch {
+                        snackbarHostState.showSnackbar(message) // Tampilkan Snackbar
+                    }
+                }
+            }
+        }
+
+        homeUiStates.listSup.isEmpty() -> {
+            // Menampilkan pesan jika data kosong
+            Box(
+                modifier = modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = "Tidak ada data barang.",
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(16.dp)
+                )
+            }
+        }
+
+        else -> {
+            ListSuplier(
+                listSup = homeUiStates.listSup,
+                onClick = {
+                    onClick(it)
+                    println(it)
+                },
+                modifier = modifier
+            )
+        }
+    }
+}
 
 @Composable
 fun ListSuplier(
