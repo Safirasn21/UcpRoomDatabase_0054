@@ -11,6 +11,12 @@ import kotlinx.coroutines.launch
 
 
 
+data class SuplierUIState(
+    val SuplierEvent: SuplierEvent = SuplierEvent(),
+    val isEntryValid: FormErrorStates = FormErrorStates(),
+    val snackBarMesssage: String? = null
+)
+
 data class FormErrorStates(
     val idS: String? = null,
     val supname: String? = null,
