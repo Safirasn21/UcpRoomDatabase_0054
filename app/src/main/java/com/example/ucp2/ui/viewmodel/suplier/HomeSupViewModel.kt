@@ -3,7 +3,6 @@ package com.example.ucp2.ui.viewmodel.suplier
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ucp2.data.entity.Suplier
-import com.example.ucp2.data.repository.RepositoryB
 import com.example.ucp2.data.repository.RepositoryS
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.SharingStarted
@@ -14,7 +13,39 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 
+class HomeSupViewModel (
+    private val repositoryS: RepositoryS
+) : ViewModel() {
 
+    val homeUiState: StateFlow<HomeUiState> = repositoryS.getAllSuplier()
+        .filterNotNull()
+        .map {
+            HomeUiState (
+                listSup = it.toList(),
+                isLoading = false,
+            )
+        }
+        .onStart {
+            emit(HomeUiState(isLoading = true))
+            delay(900)
+        }
+        .catch {
+            emit(
+                HomeUiState(
+                    isLoading = false,
+                    isError = true,
+                    errorMessage = it.message ?: "Terjadi Kesalahan"
+                )
+            )
+        }
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5000),
+            initialValue = HomeUiState(
+                isLoading = true,
+            )
+        )
+}
 
 data class HomeUiState (
     val listSup: List<Suplier> = listOf(),
