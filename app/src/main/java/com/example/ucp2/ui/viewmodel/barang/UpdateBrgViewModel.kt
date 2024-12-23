@@ -7,7 +7,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ucp2.data.entity.Barang
-import com.example.ucp2.data.repository.RepositoryB
+import com.example.ucp2.repository.RepositoryB
 import com.example.ucp2.ui.navigasi.DestinasiUpdate
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first

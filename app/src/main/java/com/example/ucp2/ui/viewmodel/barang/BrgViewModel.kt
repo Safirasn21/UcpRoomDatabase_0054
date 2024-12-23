@@ -6,7 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ucp2.data.entity.Barang
-import com.example.ucp2.data.repository.LocalRepositoryB
+import com.example.ucp2.repository.LocalRepositoryB
 import kotlinx.coroutines.launch
 
 class BrgViewModel(private val repositoryBrg: LocalRepositoryB) : ViewModel(){
