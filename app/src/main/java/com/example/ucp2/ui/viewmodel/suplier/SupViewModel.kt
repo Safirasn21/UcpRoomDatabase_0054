@@ -5,8 +5,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ucp2.data.entity.Suplier
-import com.example.ucp2.data.repository.LocalRepositoryS
-import com.example.ucp2.ui.viewmodel.barang.FormErrorState
+import com.example.ucp2.repository.LocalRepositoryS
 import kotlinx.coroutines.launch
 
 class SupViewModel(private val repositoryS: LocalRepositoryS) : ViewModel(){
