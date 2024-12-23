@@ -45,6 +45,26 @@ import kotlinx.coroutines.launch
 
 
 
+@Composable
+fun ListSuplier(
+    listSup: List<Suplier>,
+    modifier: Modifier = Modifier,
+    onClick: (String) -> Unit = { }
+) {
+    LazyColumn (
+        modifier = modifier
+    ) {
+        items(
+            items = listSup,
+            itemContent = { sup ->
+                CardSup(
+                    sup = sup,
+                    onClick = { onClick(sup.id_S) }
+                )
+            }
+        )
+    }
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
