@@ -17,21 +17,21 @@ class HomeSupViewModel (
     private val repositoryS: RepositoryS
 ) : ViewModel() {
 
-    val homeUiState: StateFlow<HomeUiState> = repositoryS.getAllSuplier()
+    val homeUiStates: StateFlow<HomeUiStates> = repositoryS.getAllSuplier()
         .filterNotNull()
         .map {
-            HomeUiState (
+            HomeUiStates (
                 listSup = it.toList(),
                 isLoading = false,
             )
         }
         .onStart {
-            emit(HomeUiState(isLoading = true))
+            emit(HomeUiStates(isLoading = true))
             delay(900)
         }
         .catch {
             emit(
-                HomeUiState(
+                HomeUiStates(
                     isLoading = false,
                     isError = true,
                     errorMessage = it.message ?: "Terjadi Kesalahan"
@@ -41,13 +41,13 @@ class HomeSupViewModel (
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5000),
-            initialValue = HomeUiState(
+            initialValue = HomeUiStates(
                 isLoading = true,
             )
         )
 }
 
-data class HomeUiState (
+data class HomeUiStates (
     val listSup: List<Suplier> = listOf(),
     val isLoading: Boolean = false,
     val isError: Boolean = false,
