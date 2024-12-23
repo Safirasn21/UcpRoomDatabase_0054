@@ -34,6 +34,33 @@ import com.example.ucp2.ui.viewmodel.suplier.SuplierUIState
 import kotlinx.coroutines.launch
 
 
+
+@Composable
+fun InsertBodySup(
+    modifier: Modifier = Modifier,
+    onValueChange: (SuplierEvent) -> Unit,
+    uiState: SuplierUIState,
+    onClick: () -> Unit
+){
+    Column (
+        modifier = Modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ){
+        FormSuplier(
+            SuplierEvent = uiState.SuplierEvent,
+            onValueChange = onValueChange,
+            errorStates = uiState.isEntryValid,
+            modifier = Modifier.fillMaxWidth()
+        )
+        Button(
+            onClick = onClick,
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            Text("Simpan")
+        }
+    }
+}
 @Preview(showBackground = true)
 @Composable
 fun FormSuplier(
