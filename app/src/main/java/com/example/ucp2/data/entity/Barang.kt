@@ -1,8 +1,10 @@
 package com.example.ucp2.data.entity
 
+import androidx.room.DatabaseView
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+@DatabaseView
 @Entity(tableName = "barang")
 data class Barang(
     @PrimaryKey
